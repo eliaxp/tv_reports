@@ -1,0 +1,1372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record id="paperformat_roapmap" model="report.paperformat">
+			<field name="name">Hoja de ruta A4</field>
+			<field name="default" eval="False"/>
+			<field name="format">A4</field>
+			<field name="page_height">0</field>
+			<field name="page_width">0</field>
+			<field name="orientation">Portrait</field>
+			<field name="margin_top">5</field>
+			<field name="margin_bottom">5</field>
+			<field name="margin_left">7</field>
+			<field name="margin_right">7</field>
+			<field name="header_line" eval="False"/>
+			<field name="header_spacing">10</field>
+			<field name="dpi">95</field>
+		</record>
+
+		<template id="roadmap_report">
+			<t t-call="web.html_container">
+				<div class="header" />
+				<div class="article">
+					<t t-foreach="docs" t-as="sale_order">
+						<t t-foreach="sale_order['categories']" t-as="categ">
+							<t t-if="'congelados' in categ">
+								<div class="page">
+									<t t-if="'resumen' in sale_order">
+								        <div class="row">
+								            <div class="col-xs-12">
+								            <div class="col-xs-9">
+								                <img t-att-src="sale_order['resumen']['url']" alt="Qr code" width="150" height="150" />
+								            </div>
+								            <div class="col-xs-3">
+								                <div class="col-xs-12">
+								                    <span style="font-size: 12px;" t-esc="sale_order['resumen']['cliente']" />
+								                </div>
+								                <div class="col-xs-12">
+								                    <span style="font-size: 12px;" t-esc="sale_order['resumen']['dir']" />
+								                </div>
+								                <dir class="col-xs-12" style="border-top: 1px solid black; border-bottom: 1px solid black;">
+								                    <span style="font-size: 12px; padding-right: 65px;">Subtotal: </span><span style="font-size: 12px;" t-esc="sale_order['resumen']['subtotal']" />
+								                    <br />
+								                    <span style="font-size: 12px; padding-right: 30px;">Deuda Pasada: </span><span style="font-size: 12px;" t-esc="sale_order['resumen']['deuda']" />
+								                    <br />
+								                    <span style="font-size: 12px; font-weight: bold; padding-right: 81px">Total: </span><span style="font-size: 12px; font-weight: bold;" t-esc="sale_order['resumen']['total']" />
+								                </dir>
+								            </div>
+								        </div> 
+								        </div> 
+									</t>
+									<div style="float: left !important;">
+										<h2 t-esc="categ['congelados']['date_order']"></h2>
+									</div>
+									<div style="left: 35% !important; position: absolute !important;">
+										<h2>Congelados</h2>
+									</div>
+									<div class="container">
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="col-xs-6">
+												<div class="col-xs-4">
+				                            		<span>Burganas</span>
+				                            	</div>
+				                            	<div class="col-xs-4">
+				                            		<span style="font-size: 12px;" t-esc="categ['congelados']['burganas']['berenjena']" />
+				                            		<span style="font-size: 12px;">Berenjena</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['congelados']['burganas']['brocoli']" />
+				                            		<span style="font-size: 12px;">Brócoli</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['congelados']['burganas']['calabaza']" />
+				                            		<span style="font-size: 12px;">Calabaza</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['congelados']['burganas']['cebolla']" />
+				                            		<span style="font-size: 12px;">Cebolla</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['congelados']['burganas']['espinaca']" />
+				                            		<span style="font-size: 12px;">Espinaca</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['congelados']['burganas']['lentejas']" />
+				                            		<span style="font-size: 12px;">Lentejas</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['congelados']['burganas']['tomate']" />
+				                            		<span style="font-size: 12px;">Tomate</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['congelados']['burganas']['romero']" />
+				                            		<span style="font-size: 12px;">Romero</span>
+				                            	</div>
+				                            	<div class="col-xs-4" style="padding-top: 35% !important;">
+				                            		<span style="font-size: 12px;" t-esc="categ['congelados']['total_burganas']" />
+				                            		<span>Burganas</span>
+				                            	</div>
+				                            	<div class="col-xs-4">
+				                            		<span>Caja Burganas</span>
+				                            	</div>
+				                            	<div class="col-xs-4">
+				                            		<span style="font-size: 12px;" t-esc="categ['congelados']['caja_burganas']['caja_berenjena']" />
+				                            		<span style="font-size: 12px;">Caja Berenjena</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['congelados']['caja_burganas']['galletitas']" />
+				                            		<span style="font-size: 12px;">Galletitas</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['congelados']['caja_burganas']['caja_calabaza']" />
+				                            		<span style="font-size: 12px;">Caja Calabaza</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['congelados']['caja_burganas']['caja_cebolla']" />
+				                            		<span style="font-size: 12px;">Caja Cebolla</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['congelados']['caja_burganas']['caja_espinaca']" />
+				                            		<span style="font-size: 12px;">Caja Espinaca</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['congelados']['caja_burganas']['caja_lentejas']" />
+				                            		<span style="font-size: 12px;">Caja Lentejas</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['congelados']['caja_burganas']['caja_tomate']" />
+				                            		<span style="font-size: 12px;">Caja Tomate</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['congelados']['caja_burganas']['caja_zanahoria']" />
+				                            		<span style="font-size: 12px;">Caja Zanahoria</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['congelados']['caja_burganas']['caja_surtida']" />
+				                            		<span style="font-size: 12px;">Caja Surtida</span>
+				                            	</div>
+				                            	<div class="col-xs-4" style="padding-top: 40% !important;">
+				                            		<span style="font-size: 12px;" t-esc="categ['congelados']['total_caja_burganas']" />
+				                            		<span>Caja Burganas</span>
+				                            	</div>
+				                            	<div class="col-xs-4">
+													<span>Haulani 180</span>
+												</div>
+												<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['haulani_180']['coco']" />
+													<span style="font-size: 12px;">Coco</span>
+												</div>
+												<div class="col-xs-4" style="padding-top: 1% !important;">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['total_haulani_180']" />
+													<span>Haulani 180</span>
+												</div>
+												<div class="col-xs-4">
+													<span>Haulani 500</span>
+												</div>
+												<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['haulani_500']['frutilla']" />
+													<span style="font-size: 12px;">Frutilla</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['haulani_500']['dulce_de_leche']" />
+													<span style="font-size: 12px;">Dulce de Leche</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['haulani_500']['chocolate']" />
+													<span style="font-size: 12px;">Chocolate</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['haulani_500']['mantequilla']" />
+													<span style="font-size: 12px;">Mantequilla</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['haulani_500']['blanco']" />
+													<span style="font-size: 12px;">Blanco</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['haulani_500']['matcha']" />
+													<span style="font-size: 12px;">Matcha</span>
+												</div>
+												<div class="col-xs-4" style="padding-top: 25% !important;">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['total_haulani_500']" />
+													<span>Haulani 500</span>
+												</div>
+												<div class="col-xs-4">
+													<span>Kaira CLA 250</span>
+												</div>
+												<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['kaira_cla_250']['dulce_de_leche']" />
+													<span style="font-size: 12px;">Dulce de Leche</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['kaira_cla_250']['chocolate']" />
+													<span style="font-size: 12px;">Chocolate</span>
+												</div>
+												<div class="col-xs-4" style="padding-top: 7% !important;">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['total_kaira_cla_250']" />
+													<span>Kaira CLA 250</span>
+												</div>
+												<div class="col-xs-4">
+													<span>Kaira LIV 500</span>
+												</div>
+												<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['kaira_liv_500']['chocolate']" />
+													<span style="font-size: 12px;">Chocolate</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['kaira_liv_500']['banana_split']" />
+													<span style="font-size: 12px;">Banana Split</span>
+												</div>
+												<div class="col-xs-4" style="padding-top: 7% !important;">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['total_kaira_liv_500']" />
+													<span>Kaira LIV 500</span>
+												</div>
+												<div class="col-xs-4">
+													<span>Kaira LIV 250</span>
+												</div>
+												<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['kaira_liv_250']['chocolate']" />
+													<span style="font-size: 12px;">Chocolate</span>
+												</div>
+												<div class="col-xs-4" style="padding-top: 3% !important;">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['total_kaira_liv_250']" />
+													<span>Kaira LIV 250</span>
+												</div>
+												<div class="col-xs-4">
+													<span>Kaira LIV 120</span>
+												</div>
+												<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['kaira_liv_120']['chocolate']" />
+													<span style="font-size: 12px;">Chocolate</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['kaira_liv_120']['banana_split']" />
+													<span style="font-size: 12px;">Banana Split</span>
+												</div>
+												<div class="col-xs-4" style="padding-top: 7% !important;">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['total_kaira_liv_120']" />
+													<span>Kaira LIV 120</span>
+												</div>
+												<div class="col-xs-4">
+													<span>Ravioles</span>
+												</div>
+												<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['ravioles']['calabaza']" />
+													<span style="font-size: 12px;">Calabaza</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['ravioles']['espinaca']" />
+													<span style="font-size: 12px;">Espinaca</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['ravioles']['champi']" />
+													<span style="font-size: 12px;">Champi</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['ravioles']['4_quesos']" />
+													<span style="font-size: 12px;">4 Quesos</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['ravioles']['muzza']" />
+													<span style="font-size: 12px;">Muzza</span>
+												</div>
+												<div class="col-xs-4" style="padding-top: 20% !important;">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['total_ravioles']" />
+													<span>Ravioles</span>
+												</div>
+												<div class="col-xs-4">
+													<span>Postre</span>
+												</div>
+												<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['postre']['am_c_dulce_de_leche']" />
+													<span style="font-size: 12px;">Am c/ Dulce de Leche</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['postre']['am_c_arandanos']" />
+													<span style="font-size: 12px;">Am c/ Arándanos</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['postre']['choco_c_dulce_de_leche']" />
+													<span style="font-size: 12px;">Choco c/ Dulce de Leche</span>
+												</div>
+												<div class="col-xs-4" style="padding-top: 20% !important;">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['total_postre']" />
+													<span>Postre</span>
+												</div>
+												<div class="col-xs-4">
+													<span>Samosas CH </span>
+												</div>
+												<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['samosas_ch']['papa']" />
+													<span style="font-size: 12px;">Papa</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['samosas_ch']['calabaza']" />
+													<span style="font-size: 12px;">Calabaza</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['samosas_ch']['batata']" />
+													<span style="font-size: 12px;">Batata</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['samosas_ch']['caprese']" />
+													<span style="font-size: 12px;">Caprese</span>
+												</div>
+												<div class="col-xs-4" style="padding-top: 18% !important;">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['total_samosas_ch']" />
+													<span>Samosas CH </span>
+												</div>
+												<div class="col-xs-4">
+			                            			<span>Frutas GR</span>
+			                            		</div>
+			                            		<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['frutas_gr']['arandano_600g']" />
+													<span style="font-size: 12px;">Arándano 600g</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['frutas_gr']['frambuesa_450g']" />
+													<span style="font-size: 12px;">Frambuesa 450g</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['frutas_gr']['frutilla_600g']" />
+													<span style="font-size: 12px;">Frutilla 600g</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['frutas_gr']['mix_berries_600g']" />
+													<span style="font-size: 12px;">Mix Berries 600g</span>
+			                            		</div>
+			                            		<div class="col-xs-4" style="padding-top: 17% !important;">
+			                            			<span style="font-size: 12px;" t-esc="categ['congelados']['total_frutas_gr']" />
+			                            			<span>Frutas GR</span>
+			                            		</div>
+							            	</div>
+							            	<div class="col-xs-6">
+			                            		<div class="col-xs-4">
+			                            			<span>Frutas CH</span>
+			                            		</div>
+			                            		<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['frutas_ch']['frutilla_durazno_300g']" />
+													<span style="font-size: 12px;">Frutilla-Durazno 300g</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['frutas_ch']['mix_3_berries_300g']" />
+													<span style="font-size: 12px;">Mix 3 Berries 300g</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['frutas_ch']['mango_maracuya_300g']" />
+													<span style="font-size: 12px;">Mango-Maracuyá 300g</span>
+			                            		</div>
+			                            		<div class="col-xs-4" style="padding-top: 25% !important;">
+			                            			<span style="font-size: 12px;" t-esc="categ['congelados']['total_frutas_ch']" />
+			                            			<span>Frutas CH</span>
+			                            		</div>
+			                            		<div class="col-xs-4">
+			                            			<span>Rebozados Kari</span>
+			                            		</div>
+			                            		<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['rebozados_kari']['champi']" />
+													<span style="font-size: 12px;">Champi</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['rebozados_kari']['brocoli']" />
+													<span style="font-size: 12px;">Brócoli</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['rebozados_kari']['aros']" />
+													<span style="font-size: 12px;">Aros</span>
+			                            		</div>
+			                            		<div class="col-xs-4" style="padding-top: 12% !important;">
+			                            			<span style="font-size: 12px;" t-esc="categ['congelados']['total_rebozados_kari']" />
+			                            			<span>Rebozados Kari</span>
+			                            		</div>
+			                            		<div class="col-xs-4">
+			                            			<span>Bites</span>
+			                            		</div>
+			                            		<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['bites']['bites_arandanos']" />
+													<span style="font-size: 12px;">Bites Arándanos</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['bites']['bites_frambuesas']" />
+													<span style="font-size: 12px;">Bites Frambuesas</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['bites']['calabaza']" />
+													<span style="font-size: 12px;">Calabaza</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['bites']['bites_frutilla']" />
+													<span style="font-size: 12px;">Bites Frutilla</span>
+			                            		</div>
+			                            		<div class="col-xs-4" style="padding-top: 24% !important;">
+			                            			<span style="font-size: 12px;" t-esc="categ['congelados']['total_bites']" />
+			                            			<span>Bites</span>
+			                            		</div>
+			                            		<div class="col-xs-4">
+			                            			<span>Torta</span>
+			                            		</div>
+			                            		<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['tortas']['blanco_y_frambuesa']" />
+													<span style="font-size: 12px;">Blanco y Frambuesa</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['tortas']['black_forest']" />
+													<span style="font-size: 12px;">Black Forest</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['tortas']['marquise']" />
+													<span style="font-size: 12px;">Marquise</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['tortas']['nut_pie']" />
+													<span style="font-size: 12px;">Nut Pie</span>
+			                            		</div>
+			                            		<div class="col-xs-4" style="padding-top: 21% !important;">
+			                            			<span style="font-size: 12px;" t-esc="categ['congelados']['total_torta']" />
+			                            			<span>Torta</span>
+			                            		</div>
+			                            		<div class="col-xs-4">
+													<span>Pizza</span>
+												</div>
+												<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['pizza']['calabaza']" />
+													<span style="font-size: 12px;">Calabaza</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['pizza']['brocoli']" />
+													<span style="font-size: 12px;">Brócoli</span>
+												</div>
+												<div class="col-xs-4" style="padding-top: 7% !important;">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['total_pizza']" />
+													<span>Pizza</span>
+												</div>
+												<div class="col-xs-4">
+													<span>Pizza VEG</span>
+												</div>
+												<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['pizza_veg']['zanahoria']" />
+													<span style="font-size: 12px;">Zanahoria</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['pizza_veg']['calabaza']" />
+													<span style="font-size: 12px;">Calabaza</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['pizza_veg']['brocoli']" />
+													<span style="font-size: 12px;">Brócoli</span>
+												</div>
+												<div class="col-xs-4" style="padding-top: 12% !important;">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['total_pizza_veg']" />
+													<span>Pizza VEG</span>
+												</div>
+												<div class="col-xs-4">
+													<span>Croqueta</span>
+												</div>
+												<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['croqueta']['espinaca']" />
+													<span style="font-size: 12px;">Espinaca</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['croqueta']['calabaza']" />
+													<span style="font-size: 12px;">Calabaza</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['croqueta']['batata']" />
+													<span style="font-size: 12px;">Batata</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['croqueta']['papa']" />
+													<span style="font-size: 12px;">Papa</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['croqueta']['espi_veg']" />
+													<span style="font-size: 12px;">Espi Veg</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['croqueta']['calabaza_veg']" />
+													<span style="font-size: 12px;">Calabaza Veg</span>
+												</div>
+												<div class="col-xs-4" style="padding-top: 28% !important;">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['total_croqueta']" />
+													<span>Croqueta</span>
+												</div>
+												<div class="col-xs-4">
+													<span>Station</span>
+												</div>
+												<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['station']['bocadito']" />
+													<span style="font-size: 12px;">Bocadito</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['station']['caprese']" />
+													<span style="font-size: 12px;">Caprese</span>
+												</div>
+												<div class="col-xs-4" style="padding-top: 7% !important;">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['total_station']" />
+													<span>Station</span>
+												</div>
+												<div class="col-xs-4">
+													<span>Kari Yogt CH</span>
+												</div>
+												<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['kari_yogt_ch']['choconut']" />
+													<span style="font-size: 12px;">ChocoNUT</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['kari_yogt_ch']['choco_amargo']" />
+													<span style="font-size: 12px;">Choco Amargo</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['kari_yogt_ch']['dulce_de_leche']" />
+													<span style="font-size: 12px;">Dulce de Leche</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['kari_yogt_ch']['frutilla']" />
+													<span style="font-size: 12px;">Frutilla</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['kari_yogt_ch']['frutos_del_bosque']" />
+													<span style="font-size: 12px;">Frutos Del Bosque</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['kari_yogt_ch']['maracuya']" />
+													<span style="font-size: 12px;">Maracuyá</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['kari_yogt_ch']['griego']" />
+													<span style="font-size: 12px;">Griego</span>
+												</div>
+												<div class="col-xs-4" style="padding-top: 35% !important;">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['total_kari_yogt_ch']" />
+													<span>Kari Yogt CH</span>
+												</div>
+												<div class="col-xs-4">
+													<span>Kari Yogt GR</span>
+												</div>
+												<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['kari_yogt_gr']['frutos_del_bosque']" />
+													<span style="font-size: 12px;">Frutos Del Bosque</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['kari_yogt_gr']['maracuya']" />
+													<span style="font-size: 12px;">maracuyá</span>
+												</div>
+												<div class="col-xs-4" style="padding-top: 12% !important;">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['total_kari_yogt_gr']" />
+													<span>Kari Yogt GR</span>
+												</div>
+												<div class="col-xs-4">
+													<span>Amoedo Tarta</span>
+												</div>
+												<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['amoedo_tarta']['cala']" />
+													<span style="font-size: 12px;">Cala</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['amoedo_tarta']['cebo']" />
+													<span style="font-size: 12px;">Cebo</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['amoedo_tarta']['caprese']" />
+													<span style="font-size: 12px;">Caprese</span>
+												</div>
+												<div class="col-xs-4" style="padding-top: 12% !important;">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['total_amoedo_tarta']" />
+													<span>Amoedo Tarta</span>
+												</div>
+												<div class="col-xs-4">
+													<span>Amoedo Integral</span>
+												</div>
+												<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['amoedo_integral']['cala']" />
+													<span style="font-size: 12px;">Cala</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['congelados']['amoedo_integral']['zana']" />
+													<span style="font-size: 12px;">Zana</span>
+												</div>
+												<div class="col-xs-4" style="padding-top: 7% !important;">
+													<span style="font-size: 12px;" t-esc="categ['congelados']['total_amoedo_integral']" />
+													<span>Amoedo Integral</span>
+												</div>
+							            	</div>
+										</div>
+									</div>
+									</div>
+									
+									<p style="page-break-before:always;"> </p>
+								</div>
+							</t>
+							<t t-if="'refrigerados' in categ">
+								<div class="page">
+									<t t-if="'resumen' in sale_order">
+								        <div class="row">
+								            <div class="col-xs-12">
+								            <div class="col-xs-9">
+								                <img t-att-src="sale_order['resumen']['url']" alt="Qr code" width="150" height="150" />
+								            </div>
+								            <div class="col-xs-3">
+								                <div class="col-xs-12">
+								                    <span style="font-size: 12px;" t-esc="sale_order['resumen']['cliente']" />
+								                </div>
+								                <div class="col-xs-12">
+								                    <span style="font-size: 12px;" t-esc="sale_order['resumen']['dir']" />
+								                </div>
+								                <dir class="col-xs-12" style="border-top: 1px solid black; border-bottom: 1px solid black;">
+								                    <span style="font-size: 12px; padding-right: 65px;">Subtotal: </span><span style="font-size: 12px;" t-esc="sale_order['resumen']['subtotal']" />
+								                    <br />
+								                    <span style="font-size: 12px; padding-right: 30px;">Deuda Pasada: </span><span style="font-size: 12px;" t-esc="sale_order['resumen']['deuda']" />
+								                    <br />
+								                    <span style="font-size: 12px; font-weight: bold; padding-right: 81px">Total: </span><span style="font-size: 12px; font-weight: bold;" t-esc="sale_order['resumen']['total']" />
+								                </dir>
+								            </div>
+								        </div> 
+								        </div> 
+									</t>
+									<div style="float: left !important;">
+										<h2 t-esc="categ['refrigerados']['date_order']"></h2>
+									</div>
+									<div style="left: 35% !important; position: absolute !important;">
+										<h2>Refrigerados</h2>
+									</div>
+									<div class="container">
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="col-xs-6">
+				                            	<div class="col-xs-4">
+				                            		<span>Casa Vegana</span>
+				                            	</div>
+				                            	<div class="col-xs-4">
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['casa_vegana']['quinoa_andina']" />
+				                            		<span style="font-size: 12px;">Quinoa Andina</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['casa_vegana']['quinoa_hindu']" />
+				                            		<span style="font-size: 12px;">Quinoa Hindú</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['casa_vegana']['quinoa_sin_sal']" />
+				                            		<span style="font-size: 12px;">Quinoa sin Sal</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['casa_vegana']['quinoa_mediterranea']" />
+				                            		<span style="font-size: 12px;">Quinoa Mediterránea</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['casa_vegana']['mijo']" />
+				                            		<span style="font-size: 12px;">Mijo</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['casa_vegana']['yamani']" />
+				                            		<span style="font-size: 12px;">Yamani</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['casa_vegana']['lentejon']" />
+				                            		<span style="font-size: 12px;">Lentejon</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['casa_vegana']['aduki_remolacha']" />
+				                            		<span style="font-size: 12px;">Aduki Remolacha</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['casa_vegana']['aduki_hungaro']" />
+				                            		<span style="font-size: 12px;">Aduki Húngaro</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['casa_vegana']['green_moon']" />
+				                            		<span style="font-size: 12px;">Green Moon</span>
+				                            	</div>
+				                            	<div class="col-xs-4" style="padding-top: 54% !important;">
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['total_casa_vegana']" />
+				                            		<span>Casa Vegana</span>
+				                            	</div>
+				                            	<div class="col-xs-4">
+					                            	<span>Casa Vegana Toq</span>
+					                            </div>
+				                            	<div class="col-xs-4">
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['casa_vegana_toq']['falafel']" />
+				                            		<span style="font-size: 12px;">Falafel</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['casa_vegana_toq']['nugget']" />
+				                            		<span style="font-size: 12px;">Nugget</span>
+				                            		
+				                            	</div>
+				                            	<div class="col-xs-4" style="padding-top: 5% !important;">
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['total_casa_vegana_toq']" />
+				                            		<span>Casa Vegana Toq</span>
+				                            	</div>
+				                            	<div class="col-xs-4">
+					                            	<span>Vivet Leche</span>
+					                            </div>
+				                            	<div class="col-xs-4">
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['vivet_leche']['original']" />
+				                            		<span style="font-size: 12px;">Original</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['vivet_leche']['vainilla']" />
+				                            		<span style="font-size: 12px;">Vainilla</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['vivet_leche']['frutilla']" />
+				                            		<span style="font-size: 12px;">Frutilla</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['vivet_leche']['chocolate']" />
+				                            		<span style="font-size: 12px;">Chocolate</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['vivet_leche']['cafe_latte']" />
+				                            		<span style="font-size: 12px;">Café Latte</span>
+				                            	</div>
+				                            	<div class="col-xs-4" style="padding-top: 20% !important;">
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['total_vivet_leche']" />
+				                            		<span>Vivet Leche</span>
+				                            	</div>
+				                            	<div class="col-xs-4">
+					                            	<span>Vivet Queso</span>
+					                            </div>
+				                            	<div class="col-xs-4">
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['vivet_queso']['natural']" />
+				                            		<span style="font-size: 12px;">Natural</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['vivet_queso']['fina_hierbas']" />
+				                            		<span style="font-size: 12px;">Finas Hierbas</span>
+				                            	</div>
+				                            	<div class="col-xs-4" style="padding-top: 5% !important;">
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['total_vivet_queso']" />
+				                            		<span>Vivet Queso</span>
+				                            	</div>
+				                            	<div class="col-xs-4">
+					                            	<span>Sirius</span>
+					                            </div>
+				                            	<div class="col-xs-4">
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['sirius']['sirius']" />
+				                            		<span style="font-size: 12px;">Sirius</span>
+				                            	</div>
+				                            	<div class="col-xs-4">
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['total_sirius']" />
+				                            		<span>Sirius</span>
+				                            	</div>
+				                            	<div class="col-xs-4">
+					                            	<span>Placer</span>
+					                            </div>
+				                            	<div class="col-xs-4">
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['placer']['vainilla']" />
+				                            		<span style="font-size: 12px;">Vainilla</span>
+				                            	</div>
+				                            	<div class="col-xs-4">
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['total_placer']" />
+				                            		<span>Placer</span>
+				                            	</div>
+				                            	<div class="col-xs-4">
+					                            	<span>Quimya</span>
+					                            </div>
+				                            	<div class="col-xs-4">
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['quimya']['frutilla']" />
+				                            		<span style="font-size: 12px;">Frutilla</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['quimya']['mango']" />
+				                            		<span style="font-size: 12px;">Mango</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['quimya']['vainilla']" />
+				                            		<span style="font-size: 12px;">Vainilla</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['quimya']['arandanos']" />
+				                            		<span style="font-size: 12px;">Arándanos</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['quimya']['chocolate']" />
+				                            		<span style="font-size: 12px;">Chocolate</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['quimya']['coconut']" />
+				                            		<span style="font-size: 12px;">Coconut</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['quimya']['keylime_palta_granola']" />
+				                            		<span style="font-size: 12px;">Keylime Palta Granola</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['quimya']['natural_con_granola']" />
+				                            		<span style="font-size: 12px;">Natural con Granola</span>
+				                            	</div>
+				                            	<div class="col-xs-4" style="padding-top: 45% !important;">
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['total_quimya']" />
+				                            		<span>Quimya</span>
+				                            	</div>
+				                            	<div class="col-xs-4">
+													<span>Quimya YOG</span>
+												</div>
+												<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['quimya_yog']['untable_felicia']" />
+													<span style="font-size: 12px;">Untable Felicia</span>
+												</div>
+												<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['total_quimya_yog']" />
+													<span>Quimya YOG</span>
+												</div>
+												<div class="col-xs-4">
+													<span>Augus Untable</span>
+												</div>
+												<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['augus_untable']['clasico']" />
+													<span style="font-size: 12px;">Clásico</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['augus_untable']['ciboulette']" />
+													<span style="font-size: 12px;">Ciboulette</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['augus_untable']['pimenton']" />
+													<span style="font-size: 12px;">Pimenton</span>
+												</div>
+												<div class="col-xs-4" style="padding-top: 10% !important;">
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['total_augus_untable']" />
+													<span>Augus Untable</span>
+												</div>
+												<div class="col-xs-4">
+													<span>Augus Horma</span>
+												</div>
+												<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['augus_horma']['clasica']" />
+													<span style="font-size: 12px;">Clásica</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['augus_horma']['hierbas']" />
+													<span style="font-size: 12px;">Hierbas</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['augus_horma']['camembert']" />
+													<span style="font-size: 12px;">Camembert</span>
+												</div>
+												<div class="col-xs-4" style="padding-top: 10% !important;">
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['total_augus_horma']" />
+													<span>Augus Horma</span>
+												</div>
+												<div class="col-xs-4">
+													<span>Kombucha</span>
+												</div>
+												<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['kombucha_refr']['verde']" />
+													<span style="font-size: 12px;">Verde</span>
+												</div>
+												<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['total_kombucha_refr']" />
+													<span>Kombucha</span>
+												</div>
+
+												<div class="col-xs-4">
+													<span>FV Botell CH</span>
+												</div>
+												<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['fv_botell_ch']['leche_almendra']" />
+													<span style="font-size: 12px;">Leche Almendra</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['fv_botell_ch']['leche_chocolatada']" />
+													<span style="font-size: 12px;">Leche Chocolatada</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['fv_botell_ch']['leche_coco']" />
+													<span style="font-size: 12px;">Leche Coco</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['fv_botell_ch']['smoothie_frutos']" />
+													<span style="font-size: 12px;">Smoothie Frutos</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['fv_botell_ch']['smoothie_mango']" />
+													<span style="font-size: 12px;">Smoothie Mango</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['fv_botell_ch']['smoothie_banana']" />
+													<span style="font-size: 12px;">Smoothie Banana</span>
+												</div>
+												<div class="col-xs-4" style="padding-top: 34% !important;">
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['total_fv_botell_ch']" />
+													<span>FV Botell CH</span>
+												</div>
+												<div class="col-xs-4">
+													<span>FV Crema</span>
+												</div>
+												<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['fv_crema']['crema']" />
+													<span style="font-size: 12px;">Crema</span>
+												</div>
+												<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['total_fv_crema']" />
+													<span>FV Crema</span>
+												</div>
+			                            	</div>
+			                            	<div class="col-xs-6">
+			                            		 <div class="col-xs-4">			                            			
+			                            			<span>FV Cheddar</span>
+			                            		</div>
+			                            		<div class="col-xs-4">
+			                            			<span style="font-size: 12px;" t-esc="categ['refrigerados']['fv_cheddar']['cheddar']" />
+			                            			<span style="font-size: 12px;">Cheddar</span>
+			                            		</div>
+			                            		<div class="col-xs-4">
+			                            			<span style="font-size: 12px;" t-esc="categ['refrigerados']['total_fv_cheddar']" />
+			                            			<span>FV Cheddar</span>
+			                            		</div>
+			                            		<div class="col-xs-4">
+			                            			<span>FV Provoleta</span>
+			                            		</div>
+			                            		<div class="col-xs-4">
+			                            			<span style="font-size: 12px;" t-esc="categ['refrigerados']['fv_provoleta']['provoleta']" />
+			                            			<span style="font-size: 12px;">Provoleta</span>
+			                            		</div>
+			                            		<div class="col-xs-4">
+			                            			<span style="font-size: 12px;" t-esc="categ['refrigerados']['total_fv_provoleta']" />
+			                            			<span>FV Provoleta</span>
+			                            		</div>
+			                            		
+			                            		<div class="col-xs-4">
+			                            			<span>FV Mozza</span>
+			                            		</div>
+			                            		<div class="col-xs-4">
+			                            			<span style="font-size: 12px;" t-esc="categ['refrigerados']['fv_mozza']['mozarella']" />
+			                            			<span style="font-size: 12px;">Mozarella</span>
+			                            		</div>
+			                            		<div class="col-xs-4">
+			                            			<span style="font-size: 12px;" t-esc="categ['refrigerados']['total_fv_mozza']" />
+			                            			<span>FV Mozza</span>
+			                            		</div>
+			                            		 
+			                            		<div class="col-xs-4">
+			                            			<span>FV Hummus</span>
+			                            		</div>
+			                            		<div class="col-xs-4">
+			                            			<span style="font-size: 12px;" t-esc="categ['refrigerados']['fv_hummus']['hummus']" />
+			                            			<span style="font-size: 12px;">Hummus</span>
+			                            		</div>
+			                            		<div class="col-xs-4">
+			                            			<span style="font-size: 12px;" t-esc="categ['refrigerados']['total_fv_hummus']" />
+			                            			<span>FV Hummus</span>
+			                            		</div>
+			                            		<div class="col-xs-4">
+			                            			<span>FV Yogurt</span>
+			                            		</div>
+			                            		<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['fv_yogurt']['yogurt_frutilla']" />
+													<span style="font-size: 12px;">Yogurt Frutilla</span>
+													<br />
+			                            			<span style="font-size: 12px;" t-esc="categ['refrigerados']['fv_yogurt']['yogurt_durazno']" />
+			                            			<span style="font-size: 12px;">Yogurt Durazno</span>
+			                            			<br />
+			                            			<span style="font-size: 12px;" t-esc="categ['refrigerados']['fv_yogurt']['yogurt_cereales']" />
+			                            			<span style="font-size: 12px;">Yogurt Cereales</span>
+			                            		</div>
+			                            		<div class="col-xs-4" style="padding-top: 10% !important;">
+			                            			<span style="font-size: 12px;" t-esc="categ['refrigerados']['total_fv_yogurt']" />
+			                            			<span>FV Yogurt</span>
+			                            		</div>
+			                            		<div class="col-xs-4">
+			                            			<span>FV Dulce CH</span>
+			                            		</div>
+			                            		<div class="col-xs-4">
+			                            			<span style="font-size: 12px;" t-esc="categ['refrigerados']['fv_dulce_ch']['dulce_ch']" />
+			                            			<span style="font-size: 12px;">Dulce CH</span>
+			                            		</div>
+			                            		<div class="col-xs-4">
+			                            			<span style="font-size: 12px;" t-esc="categ['refrigerados']['total_fv_dulce_ch']" />
+			                            			<span>FV Dulce CH</span>
+			                            		</div>
+			                            		<div class="col-xs-4">
+			                            			<span>FV Dulce GR</span>
+			                            		</div>
+			                            		<div class="col-xs-4">
+			                            			<span style="font-size: 12px;" t-esc="categ['refrigerados']['fv_dulce_gr']['dulce_gr']" />
+			                            			<span style="font-size: 12px;">Dulce GR</span>
+			                            		</div>
+			                            		<div class="col-xs-4">
+			                            			<span style="font-size: 12px;" t-esc="categ['refrigerados']['total_fv_dulce_gr']" />
+			                            			<span>FV Dulce GR</span>
+			                            		</div>
+			                            		<div class="col-xs-4">
+			                            			<span>FV Alfajor</span>
+			                            		</div>
+			                            		<div class="col-xs-4">
+			                            			<span style="font-size: 12px;" t-esc="categ['refrigerados']['fv_alfajor']['alfajor_maicena']" />
+			                            			<span style="font-size: 12px;">Alfajor Maicena</span>
+			                            			<br />
+			                            			<span style="font-size: 12px;" t-esc="categ['refrigerados']['fv_alfajor']['alfajor_chocolate']" />
+			                            			<span style="font-size: 12px;">Alfajor Chocolate</span>
+			                            		</div>
+			                            		<div class="col-xs-4" style="padding-top: 10% !important;">
+			                            			<span style="font-size: 12px;" t-esc="categ['refrigerados']['total_fv_alfajor']" />
+			                            			<span>FV Alfajor</span>
+			                            		</div>
+			                            		<div class="col-xs-4">
+				                            		<span>Logo</span>
+					                            </div>
+				                            	<div class="col-xs-4">
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['logo']['logo_natural']" />
+				                            		<span style="font-size: 12px;">Logo Natural</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['logo']['logo_frutilla']" />
+				                            		<span style="font-size: 12px;">Logo Frutilla</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['logo']['logo_vainilla']" />
+				                            		<span style="font-size: 12px;">Logo Vainilla</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['logo']['logo_arandanos']" />
+				                            		<span style="font-size: 12px;">Logo Arándanos</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['logo']['logo_maracuya']" />
+				                            		<span style="font-size: 12px;">Logo Maracuyá</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['logo']['logo_durazno_s_azucar']" />
+				                            		<span style="font-size: 12px;">Logo Durazno s/ Azucar</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['logo']['logo_frutilla_s_azucar']" />
+				                            		<span style="font-size: 12px;">Logo Frutilla s/ Azucar</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['logo']['logo_natural_granola']" />
+				                            		<span style="font-size: 12px;">Logo Natural Granola</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['logo']['logo_vainilla_granola']" />
+				                            		<span style="font-size: 12px;">Logo Vainilla Granola</span>
+				                            	</div>
+				                            	<div class="col-xs-4" style="padding-top: 60% !important;">
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['total_logo']" />
+				                            		<span>Logo</span>
+				                            	</div>
+				                            	<div class="col-xs-4">
+				                            		<span>Cudda Hormita</span>
+					                            </div>
+				                            	<div class="col-xs-4">
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['cudda_hormita']['crudda_clasico']" />
+				                            		<span style="font-size: 12px;">Crudda Clásico</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['cudda_hormita']['crudda_provence']" />
+				                            		<span style="font-size: 12px;">Crudda Provence</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['cudda_hormita']['crudda_ahumado']" />
+				                            		<span style="font-size: 12px;">Crudda Ahumado</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['cudda_hormita']['crudda_pimienta']" />
+				                            		<span style="font-size: 12px;">Crudda Pimienta</span>
+				                            	</div>
+				                            	<div class="col-xs-4" style="padding-top: 20% !important;">
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['total_cudda_hormita']" />
+				                            		<span>Cudda Hormita</span>
+				                            	</div>
+				                            	<div class="col-xs-4">
+				                            		<span>Cudda Untable</span>
+					                            </div>
+				                            	<div class="col-xs-4">
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['cudda_untable']['crudda_untable']" />
+				                            		<span style="font-size: 12px;">Crudda Untable</span>
+				                            	</div>
+				                            	<div class="col-xs-4">
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['total_cudda_untable']" />
+				                            		<span>Cudda Untable</span>
+				                            	</div>
+				                            	<div class="col-xs-4">
+				                            		<span>Nina</span>
+					                            </div>
+				                            	<div class="col-xs-4">
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['nina_refr']['chocolate']" />
+				                            		<span style="font-size: 12px;">Chocolate</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['nina_refr']['blondies']" />
+				                            		<span style="font-size: 12px;">Blondies</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['nina_refr']['cranberry']" />
+				                            		<span style="font-size: 12px;">Cranberry</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['nina_refr']['chocochips']" />
+				                            		<span style="font-size: 12px;">Chocochips</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['nina_refr']['biscochitos']" />
+				                            		<span style="font-size: 12px;">Biscochitos</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['nina_refr']['sugar_limon']" />
+				                            		<span style="font-size: 12px;">Sugar Limon</span>
+				                            	</div>
+				                            	<div class="col-xs-4" style="padding-top: 26% !important;">
+				                            		<span style="font-size: 12px;" t-esc="categ['refrigerados']['total_nina_refr']" />
+				                            		<span>Nina</span>
+				                            	</div>
+				                            	<div class="col-xs-4">
+													<span>Jugo Litro</span>
+												</div>
+												<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['jugo_litro']['rojo']" />
+													<span style="font-size: 12px;">Rojo</span>
+												</div>
+												<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['total_jugo_litro']" />
+													<span>Jugo Litro</span>
+												</div>
+												<div class="col-xs-4">
+													<span>Cacah Vivet</span>
+												</div>
+												<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['cacah_vivet']['vainilla']" />
+													<span style="font-size: 12px;">Vainilla</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['cacah_vivet']['choco']" />
+													<span style="font-size: 12px;">Choco</span>
+												</div>
+												<div class="col-xs-4" style="padding-top: 5% !important;">
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['total_cacah_vivet']" />
+													<span>Cacah Vivet</span>
+												</div>
+												<div class="col-xs-4">
+													<span>NotCO</span>
+												</div>
+												<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['notco']['mayo']" />
+													<span style="font-size: 12px;">Mayo</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['notco']['notmilk']" />
+													<span style="font-size: 12px;">NotMilk</span>
+												</div>
+												<div class="col-xs-4" style="padding-top: 7% !important;">
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['total_notco']" />
+													<span>NotCO</span>
+												</div>
+												<div class="col-xs-4">
+													<span>Silk</span>
+												</div>
+												<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['silk_refr']['almendra']" />
+													<span style="font-size: 12px;">Almendra</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['silk_refr']['s_azucar']" />
+													<span style="font-size: 12px;">s/ Azucar</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['silk_refr']['coco']" />
+													<span style="font-size: 12px;">Coco</span>
+												</div>
+												<div class="col-xs-4" style="padding-top: 10% !important;">
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['total_silk_refr']" />
+													<span>Silk</span>
+												</div>
+												<div class="col-xs-4">
+													<span>Dale Coco</span>
+												</div>
+												<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['dale_coco_refr']['leche_de_coco']" />
+													<span style="font-size: 12px;">Leche de Coco</span>
+												</div>
+												<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['total_dale_coco_refr']" />
+													<span>Dale Coco</span>
+												</div>
+												<div class="col-xs-4">
+													<span>Sonder</span>
+												</div>
+												<div class="col-xs-4">
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['sonder']['green_tree']" />
+													<span style="font-size: 12px;">Green Tree</span>
+													<br />
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['sonder']['sunrise']" />
+													<span style="font-size: 12px;">Sunrise</span>
+												</div>
+												<div class="col-xs-4" style="padding-top: 10% !important;">
+													<span style="font-size: 12px;" t-esc="categ['refrigerados']['total_sonder']" />
+													<span>Sonder</span>
+												</div>
+			                            	</div>
+										</div>
+									</div>
+									</div>
+									
+									<p style="page-break-before:always;"> </p>
+								</div>
+							</t>
+							<t t-if="'secos' in categ">
+								<div class="page">
+									<t t-if="'resumen' in sale_order">
+								        <div class="row">
+								            <div class="col-xs-12">
+								            <div class="col-xs-9">
+								                <img t-att-src="sale_order['resumen']['url']" alt="Qr code" width="150" height="150" />
+								            </div>
+								            <div class="col-xs-3">
+								                <div class="col-xs-12">
+								                    <span style="font-size: 12px;" t-esc="sale_order['resumen']['cliente']" />
+								                </div>
+								                <div class="col-xs-12">
+								                    <span style="font-size: 12px;" t-esc="sale_order['resumen']['dir']" />
+								                </div>
+								                <dir class="col-xs-12" style="border-top: 1px solid black; border-bottom: 1px solid black;">
+								                    <span style="font-size: 12px; padding-right: 65px;">Subtotal: </span><span style="font-size: 12px;" t-esc="sale_order['resumen']['subtotal']" />
+								                    <br />
+								                    <span style="font-size: 12px; padding-right: 30px;">Deuda Pasada: </span><span style="font-size: 12px;" t-esc="sale_order['resumen']['deuda']" />
+								                    <br />
+								                    <span style="font-size: 12px; font-weight: bold; padding-right: 81px">Total: </span><span style="font-size: 12px; font-weight: bold;" t-esc="sale_order['resumen']['total']" />
+								                </dir>
+								            </div>
+								        </div> 
+								        </div> 
+									</t>
+									<div style="float: left !important;">
+										<h2 t-esc="categ['secos']['date_order']"></h2>
+									</div>
+									<div style="left: 35% !important; position: absolute !important;">
+										<h2>Secos</h2>
+									</div>
+									<div class="container">
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="col-xs-6">
+												<div class="col-xs-4">
+				                            		<span>Vivet Cacahuate</span>
+					                            </div>
+				                            	<div class="col-xs-4">
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['vivet_cacahuate']['cacao']" />
+				                            		<span style="font-size: 12px;">Cacao</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['vivet_cacahuate']['vainilla_natural']" />
+				                            		<span style="font-size: 12px;">Vainilla Natural</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['vivet_cacahuate']['vainilla_caramel']" />
+				                            		<span style="font-size: 12px;">Vainilla Caramel</span>
+				                            	</div>
+				                            	<div class="col-xs-4" style="padding-top: 12% !important;">
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['total_vivet_cacahuate']" />
+				                            		<span>Vivet Cacahuate</span>
+				                            	</div>
+				                            	<div class="col-xs-4">
+				                            		<span>Quimya Granola</span>
+					                            </div>
+				                            	<div class="col-xs-4">
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['quimya_granola']['familiar']" />
+				                            		<span style="font-size: 12px;">Familiar</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['quimya_granola']['individual']" />
+				                            		<span style="font-size: 12px;">Individual</span>
+				                            	</div>
+				                            	<div class="col-xs-4" style="padding-top: 8% !important;">
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['total_quimya_granola']" />
+				                            		<span>Quimya Granola</span>
+				                            	</div>
+				                            	<div class="col-xs-4">
+				                            		<span>Kombucha</span>
+					                            </div>
+				                            	<div class="col-xs-4">
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['kombucha']['negro']" />
+				                            		<span style="font-size: 12px;">Negro</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['kombucha']['rojo']" />
+				                            		<span style="font-size: 12px;">Rojo</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['kombucha']['verde']" />
+				                            		<span style="font-size: 12px;">Verde</span>
+				                            	</div>
+				                            	<div class="col-xs-4" style="padding-top: 12% !important;">
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['total_kombucha']" />
+				                            		<span>Kombucha</span>
+				                            	</div>
+				                            	<div class="col-xs-4">
+				                            		<span>Felices Alfajor</span>
+					                            </div>
+				                            	<div class="col-xs-4">
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['felices_alfajor']['chocolate']" />
+				                            		<span style="font-size: 12px;">Chocolate</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['felices_alfajor']['maicena']" />
+				                            		<span style="font-size: 12px;">Maicena</span>
+				                            	</div>
+				                            	<div class="col-xs-4" style="padding-top: 8% !important;">
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['total_felices_alfajor']" />
+				                            		<span>Felices Alfajor</span>
+				                            	</div>
+				                            	<div class="col-xs-4">
+				                            		<span>Nina</span>
+					                            </div>
+				                            	<div class="col-xs-4">
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['nina_sec']['bizcochitos']" />
+				                            		<span style="font-size: 12px;">Bizcochitos</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['nina_sec']['blondie']" />
+				                            		<span style="font-size: 12px;">Blondie</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['nina_sec']['choco']" />
+				                            		<span style="font-size: 12px;">Choco</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['nina_sec']['chocochips']" />
+				                            		<span style="font-size: 12px;">Chocochips</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['nina_sec']['cranberry']" />
+				                            		<span style="font-size: 12px;">Cranberry</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['nina_sec']['limon']" />
+				                            		<span style="font-size: 12px;">Limón</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['nina_sec']['limon_sugar_free']" />
+				                            		<span style="font-size: 12px;">Limon Sugar Free</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['nina_sec']['blondies_sugar_free']" />
+				                            		<span style="font-size: 12px;">Blondies Sugar Free</span>
+				                            	</div>
+				                            	<div class="col-xs-4" style="padding-top: 40% !important;">
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['total_nina_sec']" />
+				                            		<span>Nina</span>
+				                            	</div>
+							            	</div>
+							            	<div class="col-xs-6">
+							            		<div class="col-xs-4">
+				                            		<span>PF Litro</span>
+					                            </div>
+				                            	<div class="col-xs-4">
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['pf_litro']['manzana_roja']" />
+				                            		<span style="font-size: 12px;">Manzana Roja</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['pf_litro']['manzana_verde']" />
+				                            		<span style="font-size: 12px;">Manzana Verde</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['pf_litro']['organico']" />
+				                            		<span style="font-size: 12px;">Organico</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['pf_litro']['naranja']" />
+				                            		<span style="font-size: 12px;">Naranja</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['pf_litro']['arandanos']" />
+				                            		<span style="font-size: 12px;">Arándanos</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['pf_litro']['frutilla']" />
+				                            		<span style="font-size: 12px;">Frutilla</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['pf_litro']['kiwi']" />
+				                            		<span style="font-size: 12px;">Kiwi</span>
+				                            	</div>
+				                            	<div class="col-xs-4" style="padding-top: 32% !important;">
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['total_pf_litro']" />
+				                            		<span>PF Litro</span>
+				                            	</div>
+				                            	<div class="col-xs-4">
+				                            		<span>PF 500ml</span>
+					                            </div>
+				                            	<div class="col-xs-4">
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['pf_500ml']['manzana_roja']" />
+				                            		<span style="font-size: 12px;">Manzana Roja</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['pf_500ml']['manzana_verde']" />
+				                            		<span style="font-size: 12px;">Manzana Verde</span>
+				                            	</div>
+				                            	<div class="col-xs-4" style="padding-top: 8% !important;">
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['total_pf_500ml']" />
+				                            		<span>PF 500ml</span>
+				                            	</div>
+				                            	<div class="col-xs-4">
+				                            		<span>PF 330ml</span>
+					                            </div>
+				                            	<div class="col-xs-4">
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['pf_330ml']['naranja']" />
+				                            		<span style="font-size: 12px;">Naranja</span>
+				                            	</div>
+				                            	<div class="col-xs-4" style="padding-top: 2% !important;">
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['total_pf_330ml']" />
+				                            		<span>PF 330ml</span>
+				                            	</div>
+				                            	<div class="col-xs-4">
+				                            		<span>PF 200ml</span>
+					                            </div>
+				                            	<div class="col-xs-4">
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['pf_200ml']['manzana_roja']" />
+				                            		<span style="font-size: 12px;">Manzana Roja</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['pf_200ml']['manzana_verde']" />
+				                            		<span style="font-size: 12px;">Manzana Verde</span>
+				                            	</div>
+				                            	<div class="col-xs-4" style="padding-top: 8% !important;">
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['total_pf_200ml']" />
+				                            		<span>PF 200ml</span>
+				                            	</div>
+				                            	<div class="col-xs-4">
+				                            		<span>NotMayo</span>
+					                            </div>
+				                            	<div class="col-xs-4">
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['notmayo']['mayonesa']" />
+				                            		<span style="font-size: 12px;">Mayonesa</span>
+				                            	</div>
+				                            	<div class="col-xs-4" style="padding-top: 2% !important;">
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['total_notmayo']" />
+				                            		<span>NotMayo</span>
+				                            	</div>
+				                            	<div class="col-xs-4">
+				                            		<span>NotMilk</span>
+					                            </div>
+				                            	<div class="col-xs-4">
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['notmilk']['not_milk']" />
+				                            		<span style="font-size: 12px;">Not Milk</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['notmilk']['promocion']" />
+				                            		<span style="font-size: 12px;">Promoción</span>
+				                            	</div>
+				                            	<div class="col-xs-4" style="padding-top: 6% !important;">
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['total_notmilk']" />
+				                            		<span>NotMilk</span>
+				                            	</div>
+				                            	<div class="col-xs-4">
+				                            		<span>Silk</span>
+					                            </div>
+				                            	<div class="col-xs-4">
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['silk']['alm_vainilla']" />
+				                            		<span style="font-size: 12px;">Alm Vainilla</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['silk']['almendra']" />
+				                            		<span style="font-size: 12px;">Almendra</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['silk']['almendra_sin_azucar']" />
+				                            		<span style="font-size: 12px;">Almendra Sin Azucar</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['silk']['chocolatada']" />
+				                            		<span style="font-size: 12px;">Chocolatada</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['silk']['coco']" />
+				                            		<span style="font-size: 12px;">Coco</span>
+				                            	</div>
+				                            	<div class="col-xs-4" style="padding-top: 25% !important;">
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['total_silk']" />
+				                            		<span>Silk</span>
+				                            	</div>
+				                            	<div class="col-xs-4">
+				                            		<span>Dale Coco</span>
+					                            </div>
+				                            	<div class="col-xs-4">
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['dale_coco']['agua_de_coco']" />
+				                            		<span style="font-size: 12px;">Agua de Coco</span>
+				                            		<br />
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['dale_coco']['leche_de_coco']" />
+				                            		<span style="font-size: 12px;">Leche de Coco</span>
+				                            	</div>
+				                            	<div class="col-xs-4" style="padding-top: 6% !important;">
+				                            		<span style="font-size: 12px;" t-esc="categ['secos']['total_dale_coco']" />
+				                            		<span>Dale Coco</span>
+				                            	</div>
+							            	</div>
+										</div>
+									</div>
+									</div>
+									
+									<p style="page-break-before:always;"> </p>
+								</div>
+							</t>
+						</t>
+					</t>
+				</div>
+			</t>
+		</template>
+
+		<report
+			id="action_report_print_roadmap"
+			model="sale.order"
+			string="Hoja de ruta"
+			report_type="qweb-pdf"
+			paperformat="tv_reports.paperformat_roapmap"
+			name="tv_reports.roadmap_report"
+			file="tv_reports.roadmap_report"
+		/>
+		
+	</data>
+</odoo>
